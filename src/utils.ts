@@ -26,9 +26,14 @@ export const getJiraKey = (branch: string, projKey: string): string | null => {
 };
 
 export const getPRDescription = (
-  oldPRBody: string,
+  oldPRBody: string | null,
   ticketNum: string,
 ): string => {
+
+  if (oldPRBody === null) {
+    return `${ticketNum}`;
+  }
+
   return oldPRBody.includes(ticketNum)
     ? oldPRBody
     : `
