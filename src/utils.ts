@@ -34,6 +34,5 @@ export const getPRDescription = (
     : `
 ${ticketNum}
 
-${oldPRBody}
-`;
+${oldPRBody}`;
 };

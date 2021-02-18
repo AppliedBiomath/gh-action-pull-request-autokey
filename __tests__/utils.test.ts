@@ -34,8 +34,7 @@ test('Should insert issue ref if none present', () => {
   expect(description).toEqual(`
 ${ticketNum}
 
-${oldPRBody}
-`);
+${oldPRBody}`);
 });
 
 test('Should leave as is if issue ref is there', () => {
