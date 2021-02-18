@@ -29,7 +29,6 @@ export const getPRDescription = (
   oldPRBody: string | null,
   ticketNum: string,
 ): string => {
-
   if (oldPRBody === null) {
     return `${ticketNum}`;
   }

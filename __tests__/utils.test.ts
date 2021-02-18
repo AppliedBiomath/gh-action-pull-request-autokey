@@ -38,14 +38,13 @@ ${oldPRBody}`);
 });
 
 test('Should work if initial body is null', () => {
-  const oldPRBody =  null;
+  const oldPRBody = null;
   const ticketNum = 'ABM-1234';
 
   const description = getPRDescription(oldPRBody, ticketNum);
 
   expect(description).toEqual(`${ticketNum}`);
 });
-
 
 test('Should leave as is if issue ref is there', () => {
   const oldPRBody = `
