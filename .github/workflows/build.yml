@@ -1,0 +1,46 @@
+name: 'Test-And-Publish-Dist'
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '!**'
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        name: setup node
+        with:
+          node-version: '14.x'
+
+      - run: |
+          npm ci
+      - run: |
+          npm run all
+
+      - name: "check if build has changed"
+        if: success()
+        id: has-changes
+        run: |
+            echo "LIB_DIFF=$(git diff --stat -- dist | head -1 | cut -c1-10)" >> $GITHUB_ENV
+
+      - name: "Lib Diff"
+        run: |
+           echo ${LIB_DIFF}
+
+      - name: "Commit files"
+        if: ${{ env.LIB_DIFF }}
+        run: |
+          git config --local user.email "buildaction@bot.bot"
+          git config --local user.name "Build action bot"
+          git commit -m "build action" -a
+
+      - name: "Push changes"
+        if: ${{ env.LIB_DIFF }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

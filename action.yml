@@ -1,11 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'biomath-pull-request-autokey'
+description: 'Annotates Pull Request description with JIRA key'
+author: 'Applied Biomath, LLC'
 inputs:
-  milliseconds: # change this
+  github-token:
+    description: 'Token used to update PR description and add labels.'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  jira-project-key:
+    description: 'Project key to use for ticket'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
