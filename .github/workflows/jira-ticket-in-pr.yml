@@ -2,7 +2,11 @@ name: 'Check PR description'
 on: # rebuild any PRs and main branch changes
   pull_request:
     types: [ opened, reopened, edited, ready_for_review ]
-
+  push:
+    branches:
+      - '**'
+    tags:
+      - '!**'
 jobs:
   check-pr-description: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
