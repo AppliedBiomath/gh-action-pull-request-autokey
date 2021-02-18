@@ -1,19 +1,27 @@
-import * as core from '@actions/core'
-import {wait} from './wait'
+import * as core from '@actions/core';
+import { getInputs } from './action-inputs';
+import { context } from '@actions/github';
+import { GithubConnector } from './github-connector';
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const inps = getInputs();
+    console.log(inps);
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const gh = new GithubConnector();
 
-    core.setOutput('time', new Date().toTimeString())
+    gh.checkAction();
+
+    //TODO: Ignore dependabot and other bots
+    const payload = JSON.stringify(context, undefined, 2);
+
+    console.log(`The event payload:: ${payload}`);
+    console.log('------------------------');
+
+    await gh.updatePrDetails();
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed(error.message);
   }
 }
 
-run()
+run();
