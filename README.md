@@ -7,24 +7,11 @@ This action checks the description of the pull request to see if it contains a J
 this pull request is for.  If the issue key is missing it inserts it on the first line of the 
 description.
 
-To enable add the file `jira-ticket-in-pr.yml` to your `.github/workflows` directory of the repository.
+To enable the workflow run the following command in your repository:
 
-The file should have the following contents: 
 
 ```
-name: 'Check PR description'
-on: # rebuild any PRs and main branch changes
-  pull_request:
-    types: [ opened, reopened, edited, ready_for_review ]
-
-jobs:
-  check-pr-description: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-      - uses: AppliedBiomath/gh-action-pull-request-autokey@v0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          jira-project-key: ABM
+git fetch git@github.com:AppliedBiomath/gh-action-pull-request-autokey.git  add-workflow-v0  && git cherry-pick FETCH_HEAD
 ```
 
 This action was heavily influenced by:
