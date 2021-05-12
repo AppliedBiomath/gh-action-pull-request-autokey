@@ -6,7 +6,7 @@ import { getOctokit } from '@actions/github';
 
 const MOCK_INPUT: Partial<IActionInputs> = {
   GITHUB_TOKEN: 'GITHUB_TOKEN',
-  JIRA_PROJECT_KEY: 'ABM',
+  JIRA_PROJECT_KEY:  ['ABM', 'AS'],
 };
 
 jest.mock('@actions/github', () => {
