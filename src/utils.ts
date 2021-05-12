@@ -1,13 +1,12 @@
-import {
-  //  BOT_BRANCH_PATTERNS,
-  //  DEFAULT_BRANCH_PATTERNS,
-  JIRA_REGEX_MATCHER,
-} from './constants';
+import { JIRA_REGEX_MATCHER } from './constants';
 
 export const ensureNotNull = (value: string | undefined): string =>
   !value ? '' : value;
 
-export const getJiraKey = (branch: string, projKey: string): string | null => {
+export const getJiraKey = (
+  branch: string,
+  projKeys: string[],
+): string | null => {
   const regExp = new RegExp(JIRA_REGEX_MATCHER);
   const matches = regExp.exec(branch);
   const key = matches ? matches[matches.length - 1] : null;
@@ -16,9 +15,9 @@ export const getJiraKey = (branch: string, projKey: string): string | null => {
     throw new Error(`Branch ${branch} does not contain JIRA key`);
   }
 
-  if (!key.startsWith(`${projKey}-`)) {
+  if (!projKeys.some(pKey => key.startsWith(pKey))) {
     throw new Error(
-      `Branch ${branch} does not start with JIRA proj key ${projKey}`,
+      `Branch ${branch} does not start with any allowed JIRA proj keys ${projKeys}`,
     );
   }
 

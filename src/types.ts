@@ -19,7 +19,7 @@ export interface PullRequestParams {
 
 export interface IActionInputs {
   GITHUB_TOKEN: string;
-  JIRA_PROJECT_KEY: string;
+  JIRA_PROJECT_KEY: string[];
 }
 
 export interface IGithubData {

@@ -6,7 +6,7 @@ import { ensureNotNull, getJiraKey, getPRDescription } from './utils';
 export class GithubConnector {
   client;
   githubData: IGithubData = {} as IGithubData;
-  projKey: string;
+  projKey: string[];
 
   constructor() {
     const { GITHUB_TOKEN, JIRA_PROJECT_KEY } = getInputs();
