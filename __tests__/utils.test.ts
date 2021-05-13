@@ -6,23 +6,26 @@ test('getJIRAIssueKeys()', () => {
   expect(getJiraKey('ABM-1234-with-dashes', ['ABM', 'AS'])).toEqual('ABM-1234');
   expect(getJiraKey('AS-1234-with-dashes', ['ABM', 'AS'])).toEqual('AS-1234');
   expect(getJiraKey('ABM-1234_with_underscores', ['ABM'])).toEqual('ABM-1234');
-  expect(getJiraKey('ABM-1234-with-dashes_and-underscores', ['ABM'])).toEqual('ABM-1234');
-  expect(getJiraKey('AS-1234-with-dashes_and-underscores', ['ABM', 'AS'])).toEqual(
-    'AS-1234',
+  expect(getJiraKey('ABM-1234-with-dashes_and-underscores', ['ABM'])).toEqual(
+    'ABM-1234',
   );
-
+  expect(
+    getJiraKey('AS-1234-with-dashes_and-underscores', ['ABM', 'AS']),
+  ).toEqual('AS-1234');
 
   expect(getJiraKey('fix/JDK-1234-with-dashes', ['JDK'])).toEqual('JDK-1234');
   expect(getJiraKey('fix/ABM-1234_with_underscores', ['ABM'])).toEqual(
     'ABM-1234',
   );
-  expect(getJiraKey('fix/ABM-1234-with-dashes_and-underscores', ['ABM'])).toEqual(
-    'ABM-1234',
-  );
+  expect(
+    getJiraKey('fix/ABM-1234-with-dashes_and-underscores', ['ABM']),
+  ).toEqual('ABM-1234');
 
   expect(() => getJiraKey('feature/missingKey', ['JDK'])).toThrow(Error);
   expect(() => getJiraKey('ABM_1234-incorrect-naming', ['ABM'])).toThrow(Error);
-  expect(() => getJiraKey('JDK-2344-incorrect-proj-key', ['ABM'])).toThrow(Error);
+  expect(() => getJiraKey('JDK-2344-incorrect-proj-key', ['ABM'])).toThrow(
+    Error,
+  );
   expect(() => getJiraKey('', ['XYZ'])).toThrow(Error);
   expect(() => getJiraKey('main', ['XYZ'])).toThrow(Error);
   expect(() => getJiraKey('master', ['XYZ'])).toThrow(Error);
