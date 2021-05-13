@@ -6,7 +6,7 @@ export const getInputs = (): IActionInputs => {
     required: true,
   });
   const JIRA_PROJECT_KEY = core
-    .getInput('jira-project-key', {
+    .getInput('jira-project-keys', {
       required: true,
     })
     .split(' ')

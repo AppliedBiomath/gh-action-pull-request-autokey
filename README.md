@@ -11,7 +11,7 @@ To enable the workflow run the following command in your repository:
 
 
 ```
-git fetch git@github.com:AppliedBiomath/gh-action-pull-request-autokey.git  add-workflow-v0  && git cherry-pick FETCH_HEAD
+git fetch git@github.com:AppliedBiomath/gh-action-pull-request-autokey.git  add-workflow-v1  && git cherry-pick FETCH_HEAD
 ```
 
 This action was heavily influenced by:
