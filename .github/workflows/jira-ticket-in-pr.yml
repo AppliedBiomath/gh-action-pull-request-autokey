@@ -1,0 +1,13 @@
+name: 'Check PR description'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+    types: [ opened, reopened, edited, ready_for_review ]
+
+jobs:
+  check-pr-description: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: AppliedBiomath/gh-action-pull-request-autokey@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-project-keys: ABM AS
