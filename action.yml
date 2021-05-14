@@ -5,7 +5,7 @@ inputs:
   github-token:
     description: 'Token used to update PR description and add labels.'
     required: true
-  jira-project-key:
+  jira-project-keys:
     description: 'Project key to use for ticket'
     required: true
 runs:
